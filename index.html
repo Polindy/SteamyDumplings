@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to SP</title>
+    <title>Welcome to SteamyDumplingracy</title>
     <style>
         /* Body styles */
         body {
@@ -35,6 +35,7 @@
             font-size: 2.5em;
             text-transform: uppercase;
             letter-spacing: 2px;
+            font-weight: bold;
         }
 
         /* Button styles */
@@ -56,20 +57,23 @@
         .btn::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: linear-gradient(45deg, rgba(255, 0, 0, 0.5), rgba(255, 115, 0, 0.5), rgba(255, 251, 0, 0.5), rgba(72, 255, 0, 0.5), rgba(0, 255, 213, 0.5), rgba(0, 43, 255, 0.5), rgba(122, 0, 255, 0.5), rgba(255, 0, 200, 0.5), rgba(255, 0, 0, 0.5));
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.5s ease, background-position 0.5s ease;
+            top: 0;
+            left: 0;
+            width: 200%; /* Double width for seamless looping */
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(255, 0, 0, 0.8), rgba(255, 115, 0, 0.8), rgba(255, 251, 0, 0.8), 
+                rgba(72, 255, 0, 0.8), rgba(0, 255, 213, 0.8), rgba(0, 43, 255, 0.8), 
+                rgba(122, 0, 255, 0.8), rgba(255, 0, 200, 0.8), rgba(255, 0, 0, 0.8));
+            background-size: 200% 100%; /* Double width for seamless looping */
             z-index: 0;
-            background-size: 200% 200%;
-            animation: moveGradient 5s linear infinite;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: 25px;
+            animation: moveGradient 2s linear infinite; /* Faster animation */
         }
         .btn:hover::before {
-            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
         }
         .btn span {
             position: relative;
@@ -84,20 +88,14 @@
         .btn:hover span {
             color: #fff;
         }
-        .btn:active::before {
-            transform: translate(-50%, -50%) scale(0.9);
-        }
 
         /* Gradient animation */
         @keyframes moveGradient {
             0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
+                transform: translateX(-50%); /* Start at -50% to create a seamless loop */
             }
             100% {
-                background-position: 0% 50%;
+                transform: translateX(0%); /* End at 0% to create a seamless loop */
             }
         }
 
@@ -120,9 +118,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to SP</h1>
+        <!-- Updated heading -->
+        <h1>Welcome to SteamyDumplingracy</h1>
         <!-- Full Package Button -->
-        <a href="https://gofile.io/d/scWmXA" class="btn" download><span>Full Package for SP</span></a>
+        <a href="https://gofile.io/d/scWmXA" class="btn" download><span>Full Package</span></a>
         <!-- Tutorial Button -->
         <a href="tutorial.html" class="btn"><span>Tutorial</span></a>
         <!-- More Coming Soon Button (at the bottom) -->
