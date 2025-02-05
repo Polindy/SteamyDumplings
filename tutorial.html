@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial</title>
+    <style>
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 20px;
+            opacity: 0; /* Start invisible */
+            animation: fadeIn 0.5s ease forwards; /* Fade-in animation */
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Fade-out animation */
+        body.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Heading styles */
+        h1 {
+            color: #bb86fc;
+        }
+
+        /* Paragraph styles */
+        p {
+            line-height: 1.6;
+        }
+
+        /* Ordered list styles */
+        ol {
+            line-height: 1.6;
+        }
+
+        /* Link styles */
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tutorial</h1>
+    <p>Here’s how to use the RAR file from the GoFile link:</p>
+    <ol>
+        <li>Download the RAR file from the <a href="https://gofile.io/d/scWmXA" target="_blank">GoFile link</a>.</li>
+        <li>Extract the contents of the RAR file using a tool like <a href="https://www.win-rar.com/" target="_blank">WinRAR</a> or <a href="https://www.7-zip.org/" target="_blank">7-Zip</a>.</li>
+        <li>Follow the instructions included in the extracted files to set up your environment.</li>
+        <li>Enjoy using the SP package! 🎉</li>
+    </ol>
+    <p><a href="index.html">← Go back to the homepage</a></p>
+
+    <script>
+        // Add fade-out animation when clicking links
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.href && !link.href.includes('#')) {
+                    e.preventDefault(); // Prevent the default link behavior
+                    document.body.classList.add('fade-out'); // Start fade-out animation
+
+                    // Navigate to the new page after the fade-out completes
+                    setTimeout(() => {
+                       
