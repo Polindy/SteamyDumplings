@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download - SteamyDumplingracy</title>
+    <style>
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #2d2d2d;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        /* Heading styles */
+        h1 {
+            color: #bb86fc;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Input and button styles */
+        #app-id-input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 25px;
+            border: 1px solid #bb86fc;
+            background-color: #2d2d2d;
+            color: #ffffff;
+            font-size: 1em;
+            outline: none;
+        }
+        #generate-link {
+            padding: 15px 30px;
+            background-color: #6200ee;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        #generate-link:hover {
+            background-color: #3700b3;
+            transform: scale(1.05);
+        }
+
+        /* Download link styles */
+        #download-link {
+            display: none;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #bb86fc;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+        #download-link:hover {
+            background-color: #9a67ea;
+            transform: scale(1.05);
+        }
+
+        /* Return button */
+        #return-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 15px 30px;
+            background-color: #6200ee;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+        #return-button:hover {
+            background-color: #3700b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Return button -->
+    <a id="return-button" href="games.html">Return to Game List</a>
+
+    <div class="container">
+        <h1>Download Game</h1>
+        <p>Paste the App ID below to get the download link:</p>
+        <input type="text" id="app-id-input" placeholder="Paste App ID here...">
+        <button id="generate-link">Generate Link</button>
+        <br><br>
+        <a id="download-link" href="#">Download [Game]</a>
+    </div>
+
+    <script>
+        // Game data with download links
+        const games = {
+            "14147": { name: "Steep", link: "https://gofile.io/d/bGT2sT" },
+            "400": { name: "Portal", link: "https://gofile.io/d/pPATcD" },
+            "440": { name: "Team Fortress 2", link: "https://gofile.io/d/mHxSUO" },
+            "21100": { name: "F.E.A.R. 3", link: "https://gofile.io/d/YgIoSj" },
+            "55110": { name: "Red Faction Armageddon", link: "https://gofile.io/d/tWnoMs" },
+            "115320": { name: "PROTOTYPE 2", link: "https://gofile.io/d/F9XKHC" },
+            "203750": { name: "Binary Domain", link: "https://gofile.io/d/cMg9O9" },
+            "213330": { name: "LEGO® Batman™ 2 DC Super Heroes", link: "https://gofile.io/d/xazwAu" },
+            "222480": { name: "Resident Evil Revelations", link: "https://gofile.io/d/0Rnl1d" },
+            "223850": { name: "3DMark", link: "https://gofile.io/d/FOi73a" },
+            "227300": { name: "Euro Truck Simulator 2 +98 Dlcs", link: "https://gofile.io/d/leZZ7Z" },
+            "242550": { name: "Rayman® Legends", link: "https://gofile.io/d/kxFdEf" },
+            "244210": { name: "Assetto Corsa", link: "https://gofile.io/d/rKD7M0" },
+            "246620": { name: "Plague Inc Evolved", link: "https://gofile.io/d/IRK7F2" },
+            "268910": { name: "Cuphead + DLC The Delicious Last Course", link: "https://gofile.io/d/grz6Ts" },
+            "284160": { name: "BeamNG.drive", link: "https://gofile.io/d/B6EgPu" },
+            "322330": { name: "Don't Starve Together", link: "https://gofile.io/d/htPS6B" },
+            "371660": { name: "Far Cry® Primal + Bypass", link: "https://gofile.io/d/IvOkVs" },
+            "385730": { name: "WWE 2K16", link: "https://gofile.io/d/U01fRW" },
+            "431960": { name: "Wallpaper Engine", link: "https://gofile.io/d/ErYgOI" },
+            "447040": { name: "Watch Dogs 2", link: "https://gofile.io/d/p5VVnX" },
+            "526870": { name: "Satisfactory", link: "https://gofile.io/d/Irvu8m" },
+            "546560": { name: "Half-Life Alyx", link: "https://gofile.io/d/xlTpnk" },
+            "690830": { name: "Foundation", link: "https://gofile.io/d/lNdfNL" },
+            "814380": { name: "Sekiro™ Shadows Die Twice - GOTY Edition", link: "https://gofile.io/d/Su2Nr9" },
+            "824270": { name: "koovaks aim trainer", link: "https://gofile.io/d/NzMZvL" },
+            "883710": { name: "Resident Evil 2 Remake", link: "https://gofile.io/d/22Yfoh" },
+            "962400": { name: "Granny", link: "https://gofile.io/d/EeaB7I" },
+            "1114070": { name: "My Child Lebensborn", link: "https://gofile.io/d/ieuX5a" },
+            "1144200": { name: "Ready or Not", link: "https://gofile.io/d/fYIgsQ" },
+            "1211020": { name: "Wobbly Life", link: "https://gofile.io/d/pO5ZCr" },
+            "1245620": { name: "ELDEN RING", link: "https://gofile.io/d/Zf04Ug" },
+            "1357870": { name: "Metel - Horror Escape", link: "https://gofile.io/d/i6dqmL" },
+            "1426210": { name: "It Takes Two", link: "https://gofile.io/d/uJOJ1X" },
+            "1442430": { name: "Storage Hunter Simulator", link: "https://gofile.io/d/sTSxJQ" },
+            "1659420": { name: "UNCHARTED™ Legacy of Thieves Collection", link: "https://gofile.io/d/fzNdwe" },
+            "1812620": { name: "DSX", link: "https://gofile.io/d/qRQ0O8" },
+            "1848450": { name: "Nightmare of Decay", link: "https://gofile.io/d/Ov2jrf" },
+            "1888930": { name: "The Last of Us™ Part I", link: "https://gofile.io/d/GaleNq" },
+            "1947500": { name: "The Walking Dead Saints & Sinners - Chapter 2 Retribution", link: "https://gofile.io/d/eQABTa" },
+            "2012840": { name: "Portal with RTX", link: "https://gofile.io/d/AdsdjY" },
+            "2050650": { name: "Resident Evil 4", link: "https://gofile.io/d/ZM798T" },
+            "2169200": { name: "Sniper Elite Resistance", link: "https://gofile.io/d/rCGceA" },
+            "2233120": { name: "A Quiet Place The Road Ahead", link: "https://gofile.io/d/rx5b7F" },
+            "2358720": { name: "Black Myth Wukong", link: "https://gofile.io/d/zBWxeP" },
+            "2379780": { name: "Balatro", link: "https://gofile.io/d/nJx4Rn" },
+            "2536530": { name: "The Pony Factory", link: "https://gofile.io/d/i6qcUD" },
+            "2634950": { name: "tokyo extreme racer", link: "https://gofile.io/d/bntE8o" },
+            "2651280": { name: "Spider-Man 2", link: "https://gofile.io/d/l3Ro48" },
+            "2835570": { name: "Buckshot Roulette", link: "https://gofile.io/d/qiKqwZ" },
+            "2842040": { name: "Star Wars Outlaws", link: "https://gofile.io/d/NmCLZo" },
+            "3058630": { name: "Asseto Corsa Evo", link: "https://gofile.io/d/6wMAjr" },
+            "3292260": { name: "Amenti", link: "https://gofile.io/d/Mydu2L" },
+            "601050": { name: "Attack on Titan 2 - A.O.T.2", link: "https://gofile.io/d/aVRPSv" },
+            "1091500": { name: "CyberPunk 2077", link: "https://gofile.io/d/AkI3gm" },
+            "2934180": { name: "Doraemon Dorayaki Shop Story", link: "https://gofile.io/d/yHFENN" },
+            "2909400": { name: "Final Fantasy VII Rebirth", link: "https://gofile.io/d/eZIkdW" },
+            "732690": { name: "FIVE NIGHTS AT FREDDY'S HELP WANTED", link: "https://gofile.io/d/zBCo7B" },
+            "4000": { name: "Garry's Mod", link: "https://gofile.io/d/zupjEk" },
+            "2215430": { name: "Ghost of Tsushima DIRECTOR'S CUT", link: "https://gofile.io/d/3i3Fhv" },
+            "1533390": { name: "Gorilla Tag", link: "https://gofile.io/d/outXU8" },
+            "962130": { name: "GROUNDED ONLINE FIX + ALL DLCS + GAME", link: "https://gofile.io/d/JSDMXM" },
+            "723390": { name: "Hunt Down The Freeman", link: "https://gofile.io/d/4gJksD" },
+            "1234567": { name: "Indiana Jones ATGC", link: "https://gofile.io/d/kYtLLP" },
+            "424840": { name: "Little Nightmares", link: "https://gofile.io/d/P3PaFC" },
+            "860510": { name: "Little Nightmares 2", link: "https://gofile.io/d/yg4P4e" },
+            "914620": { name: "Mist Survival", link: "https://gofile.io/d/KnwcDy" },
+            "976310": { name: "Mortal Kombat 11", link: "https://gofile.io/d/Eo2kQy" },
+            "307780": { name: "Mortal Kombat X", link: "https://gofile.io/d/167ef3" },
+            "1250410": { name: "MS Flight Sim", link: "https://gofile.io/d/nH1ovZ" },
+            "234670": { name: "Ninja Gaiden 2 Black", link: "https://gofile.io/d/1BsFBF" },
+            "2693170": { name: "Only Up!", link: "https://gofile.io/d/g31BxM" },
+            "3008670": { name: "Poppy Playtime - Chapter 4", link: "https://gofile.io/d/KHbNbr" },
+            "620": { name: "Portal 2", link: "https://gofile.io/d/X6OoZ5" },
+            "1234568": { name: "Sonic X Shadow", link: "https://gofile.io/d/OD6V5h" },
+            "518790": { name: "theHunter Call of the Wild™", link: "https://gofile.io/d/4PVp6C" },
+            "1159690": { name: "Voidtrain", link: "https://gofile.io/d/sZZokS" },
+            "3198320": { name: "Willie's Nightfall", link: "https://gofile.io/d/niGY0k" }
+            "1086940": { name: "Baldur's Gate 3", link: "https://gofile.io/d/ahEIKp" }
+
+        };
+
+        // Generate download link
+        const generateLinkButton = document.getElementById('generate-link');
+        const appIdInput = document.getElementById('app-id-input');
+        const downloadLink = document.getElementById('download-link');
+
+        generateLinkButton.addEventListener('click', () => {
+            const appId = appIdInput.value.trim();
+            if (games[appId]) {
+                const gameName = games[appId].name;
+                const gameLink = games[appId].link;
+                downloadLink.href = gameLink;
+                downloadLink.textContent = `Download ${gameName}`;
+                downloadLink.style.display = 'inline-block';
+            } else {
+                alert('Invalid App ID. Please enter a valid App ID.');
+            }
+        });
+    </script>
+</body>
+</html>
