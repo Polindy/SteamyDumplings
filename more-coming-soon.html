@@ -3,37 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>More Coming Soon</title>
+    <title>More Coming Soon - SteamyDumplingracy</title>
     <style>
         /* Body styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #1a1a1a;
             color: #ffffff;
+            margin: 0;
             padding: 20px;
-            opacity: 0; /* Start invisible */
-            animation: fadeIn 0.5s ease forwards; /* Fade-in animation */
         }
 
-        /* Fade-in animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Fade-out animation */
-        body.fade-out {
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #2d2d2d;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
         }
 
         /* Heading styles */
         h1 {
             color: #bb86fc;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #6200ee;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #3700b3;
+            transform: scale(1.05);
+        }
+
+        /* Return button */
+        #return-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 15px 30px;
+            background-color: #6200ee;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+        #return-button:hover {
+            background-color: #3700b3;
+            transform: scale(1.05);
         }
 
         /* List styles */
@@ -45,43 +78,24 @@
             margin: 10px 0;
             font-size: 1.2em;
         }
-
-        /* Link styles */
-        a {
-            color: #bb86fc;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
-    <h1>More Coming Soon!</h1>
-    <p>Here’s a list of features we’re working on:</p>
-    <ul>
-        <li>🎨 Better website design</li>
-        <li>📥 A full page for downloading manifests (done)</li>
-        <li>🎮 A game list with copy-pasting for easy manifest downloads (done)</li>
-        <li>✨ And more exciting updates!</li>
-    </ul>
-    <p><a href="https://polindy.github.io/SteamyDumplings/">← Go back to the homepage</a></p>
+    <!-- Return button -->
+    <a id="return-button" href="index.html">Return to Homepage</a>
 
-    <script>
-        // Add fade-out animation when clicking links
-        document.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (link.href && !link.href.includes('#')) {
-                    e.preventDefault(); // Prevent the default link behavior
-                    document.body.classList.add('fade-out'); // Start fade-out animation
+    <div class="container">
+        <h1>More Coming Soon</h1>
+        <p>Here’s a list of features we’ve completed:</p>
+        <ul>
+            <li>🎨 Better website design</li>
+            <li>📥 A full page for downloading manifests (done)</li>
+            <li>🎮 A game list with copy-pasting for easy manifest downloads (done)</li>
+            <li>✨ And more exciting updates!</li>
+        </ul>
 
-                    // Navigate to the new page after the fade-out completes
-                    setTimeout(() => {
-                        window.location.href = link.href;
-                    }, 500); // Match the duration of the fade-out animation
-                }
-            });
-        });
-    </script>
+        <!-- Request Features button -->
+        <a href="requests.html" class="btn">Request Features</a>
+    </div>
 </body>
 </html>
