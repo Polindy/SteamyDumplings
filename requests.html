@@ -73,9 +73,26 @@
         #requested-features li {
             padding: 10px;
             border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         #requested-features li:last-child {
             border-bottom: none;
+        }
+
+        /* Delete button styles */
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .delete-btn:hover {
+            background: darkred;
         }
 
         /* Info message */
@@ -105,6 +122,7 @@
     </style>
 </head>
 <body>
+
     <!-- Return button -->
     <a id="return-button" href="more-coming-soon.html">Return to Coming Soon</a>
 
@@ -118,60 +136,86 @@
         <!-- Requested features list -->
         <div id="requested-features">
             <h2>Requested Features</h2>
-            <ul id="feature-list">
-                <!-- Feature requests will be added here dynamically -->
-            </ul>
+            <ul id="feature-list"></ul>
         </div>
     </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("✅ Page loaded!");
+    <!-- Firebase SDK - Corrected Version -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-    const submitButton = document.getElementById("submit-request");
-    const featureInput = document.getElementById("feature-input");
-    const featureList = document.getElementById("feature-list");
+    <script>
+        // 🔥 Firebase Config (Make sure this is correct!)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlaCGseWSNF41sKqdS3_PqXABgpsKVVso",
+            authDomain: "feature-requests-bf962.firebaseapp.com",
+            projectId: "feature-requests-bf962",
+            storageBucket: "feature-requests-bf962.appspot.com", // FIXED
+            messagingSenderId: "823579759336",
+            appId: "1:823579759336:web:e2faf82c62751a906def5d"
+        };
 
-    if (!submitButton || !featureInput || !featureList) {
-        console.error("❌ Missing elements.");
-        return;
-    }
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-    // Load existing requests
-    let featureRequests = JSON.parse(localStorage.getItem("featureRequests")) || [];
-    updateFeatureList();
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("✅ Firebase Loaded and Page Ready!");
 
-    submitButton.addEventListener("click", () => {
-        console.log("🖱️ Submit button clicked");
+            const submitButton = document.getElementById("submit-request");
+            const featureInput = document.getElementById("feature-input");
+            const featureList = document.getElementById("feature-list");
 
-        const feature = featureInput.value.trim();
-        if (feature) {
-            const request = { text: feature, timestamp: Date.now() };
+            if (!submitButton || !featureInput || !featureList) {
+                console.error("❌ Missing elements.");
+                return;
+            }
 
-            // Fetch the latest version from localStorage to avoid overwrites
-            featureRequests = JSON.parse(localStorage.getItem("featureRequests")) || [];
-            featureRequests.push(request);
+            // 📝 Submit New Feature Request
+            submitButton.addEventListener("click", () => {
+                const feature = featureInput.value.trim();
+                if (feature) {
+                    db.collection("requests").add({
+                        text: feature,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    }).then(() => {
+                        console.log("✅ Feature added to Firebase!");
+                        featureInput.value = "";
+                    }).catch(error => {
+                        console.error("❌ Error adding request:", error);
+                    });
+                } else {
+                    alert("⚠️ Please enter a feature request.");
+                }
+            });
 
-            localStorage.setItem("featureRequests", JSON.stringify(featureRequests));
-            console.log("✅ Feature added:", request);
-            console.log("📦 Updated featureRequests:", localStorage.getItem("featureRequests"));
+            // 👀 Real-Time Updates: Load & Display Requests
+            db.collection("requests").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+                featureList.innerHTML = "";
+                snapshot.forEach(doc => {
+                    const request = doc.data();
+                    const li = document.createElement("li");
+                    li.textContent = request.text;
 
-            updateFeatureList();
-            featureInput.value = "";
-        } else {
-            alert("⚠️ Please enter a feature request.");
-        }
-    });
+                    // 🗑️ Add a Delete Button
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "❌";
+                    deleteButton.className = "delete-btn";
+                    deleteButton.onclick = () => deleteRequest(doc.id);
 
-    function updateFeatureList() {
-        featureList.innerHTML = "";
-        featureRequests.forEach((request, index) => {
-            const li = document.createElement("li");
-            li.textContent = `${index + 1}. ${request.text}`;
-            featureList.appendChild(li);
+                    li.appendChild(deleteButton);
+                    featureList.appendChild(li);
+                });
+            });
+
+            // 🗑️ Function to Delete a Request
+            function deleteRequest(id) {
+                db.collection("requests").doc(id).delete()
+                    .then(() => console.log("🗑️ Deleted request:", id))
+                    .catch(error => console.error("❌ Error deleting request:", error));
+            }
         });
-    }
-});
-</script>
+    </script>
+
 </body>
 </html>
