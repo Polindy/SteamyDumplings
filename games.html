@@ -1,248 +1,625 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game List - SteamyDumplingracy</title>
+    <title>Games - Steamy Dumpling</title>
     <style>
-        /* Body styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* Container styles */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #2d2d2d;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Heading styles */
-        h1 {
-            color: #bb86fc;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            padding: 20px;
+            margin: 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+.sort-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.sort-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    background: #ff00ff;
+    color: white;
+    border: none;
+    box-shadow: 0 0 10px #ff00ff;
+    appearance: none;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.sort-select:hover {
+    background: #d400d4;
+    box-shadow: 0 0 20px #ff00ff;
+}
+
+.sort-select:active {
+    transform: scale(0.97);
+    box-shadow: 0 0 10px #d400d4;
+}
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Search bar styles */
-        #search {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 25px;
-            border: 1px solid #bb86fc;
-            background-color: #2d2d2d;
-            color: #ffffff;
-            font-size: 1em;
-            outline: none;
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Game list styles */
-        #game-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        #game-list li {
-            padding: 15px;
-            border-bottom: 1px solid #444;
+        .nav-bar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
         }
-        #game-list li:last-child {
-            border-bottom: none;
-        }
-        #game-list li:hover {
-            background-color: #3d3d3d;
-            transform: scale(1.02);
-        }
-        .game-id {
-            color: #bb86fc;
-            cursor: pointer;
+
+        .nav-bar a {
+            text-decoration: none;
+            color: white;
+            font-size: 1em;
             font-weight: bold;
-        }
-        .game-id:hover {
-            text-decoration: underline;
+            padding: 10px 20px;
+            background: #ff00ff;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px #ff00ff;
         }
 
-        /* Go to Download Page button */
-        #go-to-download {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 30px;
-            background-color: #6200ee;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-size: 1em;
-        }
-        #go-to-download:hover {
-            background-color: #3700b3;
+        .nav-bar a:hover {
+            background: #d400d4;
             transform: scale(1.05);
+            box-shadow: 0 0 15px #ff00ff;
         }
 
-        /* Return button */
-        #return-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 15px 30px;
-            background-color: #6200ee;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+        .container {
+            max-width: 600px;
+            margin: 80px auto 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            animation: slideUp 1s ease-in-out;
+        }
+
+        h1 {
+            color: #ff00ff;
+            font-size: 2em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        #search {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            text-align: center;
             font-size: 1em;
         }
-        #return-button:hover {
-            background-color: #3700b3;
+
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+            margin: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .game-button {
+            display: block;
+            padding: 12px;
+            background: #ff00ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px #ff00ff;
+            cursor: pointer;
+            width: 80%;
+            margin: auto;
+        }
+
+        .game-button:hover {
+            background: #d400d4;
             transform: scale(1.05);
+            box-shadow: 0 0 15px #ff00ff;
+        }
+
+        .fullscreen-toggle {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background: #ff00ff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px #ff00ff;
+        }
+
+        .fullscreen-toggle:hover {
+            background: #d400d4;
         }
     </style>
 </head>
 <body>
-    <!-- Go to Download Page button -->
-    <a id="go-to-download" href="download.html">Go to Download Page</a>
-
-    <!-- Return button -->
-    <a id="return-button" href="index.html">Return to Homepage</a>
+    <div class="nav-bar">
+        <a href="index.html">🏠 Home</a>
+        <a href="download.html">⬇️ Download</a>
+        <a href="steamtools.html">🛠️ SteamTools</a> <!-- New button here -->
+    </div>
 
     <div class="container">
         <h1>Game List</h1>
-        <!-- Search bar -->
         <input type="text" id="search" placeholder="Search by name or App ID...">
-        <!-- Game list -->
-        <ul id="game-list">
-            <!-- Your game list (same as before) -->
-            <li><span class="game-name">Steep</span><span class="game-id" data-id="14147">14147</span></li>
-            <li><span class="game-name">Portal</span><span class="game-id" data-id="400">400</span></li>
-            <li><span class="game-name">Team Fortress 2</span><span class="game-id" data-id="440">440</span></li>
-            <li><span class="game-name">F.E.A.R. 3</span><span class="game-id" data-id="21100">21100</span></li>
-            <li><span class="game-name">Red Faction Armageddon</span><span class="game-id" data-id="55110">55110</span></li>
-            <li><span class="game-name">PROTOTYPE 2</span><span class="game-id" data-id="115320">115320</span></li>
-            <li><span class="game-name">Binary Domain</span><span class="game-id" data-id="203750">203750</span></li>
-            <li><span class="game-name">LEGO® Batman™ 2 DC Super Heroes</span><span class="game-id" data-id="213330">213330</span></li>
-            <li><span class="game-name">Resident Evil Revelations</span><span class="game-id" data-id="222480">222480</span></li>
-            <li><span class="game-name">3DMark</span><span class="game-id" data-id="223850">223850</span></li>
-            <li><span class="game-name">Euro Truck Simulator 2 +98 Dlcs</span><span class="game-id" data-id="227300">227300</span></li>
-            <li><span class="game-name">Rayman® Legends</span><span class="game-id" data-id="242550">242550</span></li>
-            <li><span class="game-name">Assetto Corsa</span><span class="game-id" data-id="244210">244210</span></li>
-            <li><span class="game-name">Plague Inc Evolved</span><span class="game-id" data-id="246620">246620</span></li>
-            <li><span class="game-name">Cuphead + DLC The Delicious Last Course</span><span class="game-id" data-id="268910">268910</span></li>
-            <li><span class="game-name">BeamNG.drive</span><span class="game-id" data-id="284160">284160</span></li>
-            <li><span class="game-name">Don't Starve Together</span><span class="game-id" data-id="322330">322330</span></li>
-            <li><span class="game-name">Far Cry® Primal</span><span class="game-id" data-id="371660">371660</span></li>
-            <li><span class="game-name">WWE 2K16</span><span class="game-id" data-id="385730">385730</span></li>
-            <li><span class="game-name">Wallpaper Engine</span><span class="game-id" data-id="431960">431960</span></li>
-            <li><span class="game-name">Watch Dogs 2</span><span class="game-id" data-id="447040">447040</span></li>
-            <li><span class="game-name">Satisfactory</span><span class="game-id" data-id="526870">526870</span></li>
-            <li><span class="game-name">Half-Life Alyx</span><span class="game-id" data-id="546560">546560</span></li>
-            <li><span class="game-name">Foundation</span><span class="game-id" data-id="690830">690830</span></li>
-            <li><span class="game-name">Sekiro™ Shadows Die Twice - GOTY Edition</span><span class="game-id" data-id="814380">814380</span></li>
-            <li><span class="game-name">koovaks aim trainer</span><span class="game-id" data-id="824270">824270</span></li>
-            <li><span class="game-name">Resident Evil 2 Remake</span><span class="game-id" data-id="883710">883710</span></li>
-            <li><span class="game-name">Granny</span><span class="game-id" data-id="962400">962400</span></li>
-            <li><span class="game-name">My Child Lebensborn</span><span class="game-id" data-id="1114070">1114070</span></li>
-            <li><span class="game-name">Ready or Not</span><span class="game-id" data-id="1144200">1144200</span></li>
-            <li><span class="game-name">Wobbly Life</span><span class="game-id" data-id="1211020">1211020</span></li>
-            <li><span class="game-name">ELDEN RING</span><span class="game-id" data-id="1245620">1245620</span></li>
-            <li><span class="game-name">Metel - Horror Escape</span><span class="game-id" data-id="1357870">1357870</span></li>
-            <li><span class="game-name">It Takes Two</span><span class="game-id" data-id="1426210">1426210</span></li>
-            <li><span class="game-name">Storage Hunter Simulator</span><span class="game-id" data-id="1442430">1442430</span></li>
-            <li><span class="game-name">UNCHARTED™ Legacy of Thieves Collection</span><span class="game-id" data-id="1659420">1659420</span></li>
-            <li><span class="game-name">DSX</span><span class="game-id" data-id="1812620">1812620</span></li>
-            <li><span class="game-name">Nightmare of Decay</span><span class="game-id" data-id="1848450">1848450</span></li>
-            <li><span class="game-name">The Last of Us™ Part I</span><span class="game-id" data-id="1888930">1888930</span></li>
-            <li><span class="game-name">The Walking Dead Saints & Sinners - Chapter 2 Retribution</span><span class="game-id" data-id="1947500">1947500</span></li>
-            <li><span class="game-name">Portal with RTX</span><span class="game-id" data-id="2012840">2012840</span></li>
-            <li><span class="game-name">Resident Evil 4</span><span class="game-id" data-id="2050650">2050650</span></li>
-            <li><span class="game-name">Sniper Elite Resistance</span><span class="game-id" data-id="2169200">2169200</span></li>
-            <li><span class="game-name">A Quiet Place The Road Ahead</span><span class="game-id" data-id="2233120">2233120</span></li>
-            <li><span class="game-name">Black Myth Wukong</span><span class="game-id" data-id="2358720">2358720</span></li>
-            <li><span class="game-name">Balatro</span><span class="game-id" data-id="2379780">2379780</span></li>
-            <li><span class="game-name">The Pony Factory</span><span class="game-id" data-id="2536530">2536530</span></li>
-            <li><span class="game-name">tokyo extreme racer</span><span class="game-id" data-id="2634950">2634950</span></li>
-            <li><span class="game-name">Spider-Man 2</span><span class="game-id" data-id="2651280">2651280</span></li>
-            <li><span class="game-name">Buckshot Roulette</span><span class="game-id" data-id="2835570">2835570</span></li>
-            <li><span class="game-name">Star Wars Outlaws</span><span class="game-id" data-id="2842040">2842040</span></li>
-            <li><span class="game-name">Asseto Cora Evo</span><span class="game-id" data-id="3058630">3058630</span></li>
-            <li><span class="game-name">Amenti</span><span class="game-id" data-id="3292260">3292260</span></li>
-            <li><span class="game-name">Attack on Titan 2 - A.O.T.2</span><span class="game-id" data-id="601050">601050</span></li>
-            <li><span class="game-name">CyberPunk 2077</span><span class="game-id" data-id="1091500">1091500</span></li>
-            <li><span class="game-name">Doraemon Dorayaki Shop Story</span><span class="game-id" data-id="2934180">2934180</span></li>
-            <li><span class="game-name">Elden Ring</span><span class="game-id" data-id="1245620">1245620</span></li>
-            <li><span class="game-name">Final Fantasy VII Rebirth</span><span class="game-id" data-id="2909400">2909400</span></li>
-            <li><span class="game-name">FIVE NIGHTS AT FREDDY'S HELP WANTED</span><span class="game-id" data-id="732690">732690</span></li>
-            <li><span class="game-name">Garry's Mod</span><span class="game-id" data-id="4000">4000</span></li>
-            <li><span class="game-name">Ghost of Tsushima DIRECTOR'S CUT</span><span class="game-id" data-id="2215430">2215430</span></li>
-            <li><span class="game-name">Gorilla Tag</span><span class="game-id" data-id="1533390">1533390</span></li>
-            <li><span class="game-name">GROUNDED ONLINE FIX + ALL DLCS + GAME</span><span class="game-id" data-id="962130">962130</span></li>
-            <li><span class="game-name">Hunt Down The Freeman</span><span class="game-id" data-id="723390">723390</span></li>
-            <li><span class="game-name">Indiana Jones ATGC</span><span class="game-id" data-id="1234567">1234567</span></li>
-            <li><span class="game-name">Little Nightmares</span><span class="game-id" data-id="424840">424840</span></li>
-            <li><span class="game-name">Little Nightmares 2</span><span class="game-id" data-id="860510">860510</span></li>
-            <li><span class="game-name">Mist Survival</span><span class="game-id" data-id="914620">914620</span></li>
-            <li><span class="game-name">Mortal Kombat 11</span><span class="game-id" data-id="976310">976310</span></li>
-            <li><span class="game-name">Mortal Kombat X</span><span class="game-id" data-id="307780">307780</span></li>
-            <li><span class="game-name">MS Flight Sim</span><span class="game-id" data-id="1250410">1250410</span></li>
-            <li><span class="game-name">Ninja Gaiden 2 Black</span><span class="game-id" data-id="234670">234670</span></li>
-            <li><span class="game-name">Only Up!</span><span class="game-id" data-id="2693170">2693170</span></li>
-            <li><span class="game-name">Poppy Playtime - Chapter 4</span><span class="game-id" data-id="3008670">3008670</span></li>
-            <li><span class="game-name">Portal 2</span><span class="game-id" data-id="620">620</span></li>
-            <li><span class="game-name">Sonic X Shadow</span><span class="game-id" data-id="1234568">1234568</span></li>
-            <li><span class="game-name">Spider-man 2</span><span class="game-id" data-id="2651280">2651280</span></li>
-            <li><span class="game-name">Streamer Life Simulator 2</span><span class="game-id" data-id="2890830">2890830</span></li>
-            <li><span class="game-name">The Quintessential Quintuplets - Memories of a Quintessential Summer</span><span class="game-id" data-id="2507610">2507610</span></li>
-            <li><span class="game-name">The Witcher 3 Wild Hunt</span><span class="game-id" data-id="292030">292030</span></li>
-            <li><span class="game-name">theHunter Call of the Wild™</span><span class="game-id" data-id="518790">518790</span></li>
-            <li><span class="game-name">The Last of Us™ Part II</span><span class="game-id" data-id="1888930">1888930</span></li>
-            <li><span class="game-name">Voidtrain</span><span class="game-id" data-id="1159690">1159690</span></li>
-            <li><span class="game-name">Willie's Nightfall</span><span class="game-id" data-id="3198320">3198320</span></li>
-            <li><span class="game-name">Baldur's Gate 3</span><span class="game-id" data-id="1086940">1086940</span></li>
-        </ul>
-    </div>
+<div class="sort-wrapper">
+  <select id="sort-mode" class="sort-select">
+    <option value="newest">📥 Newest First</option>
+    <option value="az">🔼 A - Z</option>
+    <option value="za">🔽 Z - A</option>
+    <option value="oldest">📤 Oldest First</option>
+  </select>
 
-    <script>
-        // Search functionality
-        const searchInput = document.getElementById('search');
-        const gameList = document.getElementById('game-list').getElementsByTagName('li');
+  <p id="result-count" style="margin: 10px 0; font-weight: bold; color: #ffccff;">Showing 0 games</p>
 
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            for (const game of gameList) {
-                const gameName = game.querySelector('.game-name').textContent.toLowerCase();
-                const gameId = game.querySelector('.game-id').textContent;
-                if (gameName.includes(searchTerm) || gameId.includes(searchTerm)) {
-                    game.style.display = 'flex';
-                } else {
-                    game.style.display = 'none';
-                }
+  <ul id="game-list"></ul>
+</div>
+
+    <button class="fullscreen-toggle" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const games = {
+    "14147": "Steep",
+    "400": "Portal",
+    "440": "Team Fortress 2",
+    "21100": "F.E.A.R. 3",
+    "55110": "Red Faction Armageddon",
+    "115320": "PROTOTYPE 2",
+    "203750": "Binary Domain",
+    "213330": "LEGO® Batman™ 2 DC Super Heroes",
+    "222480": "Resident Evil Revelations",
+    "223850": "3DMark",
+    "227300": "Euro Truck Simulator 2 +98 Dlcs",
+    "242550": "Rayman® Legends",
+    "244210": "Assetto Corsa",
+    "246620": "Plague Inc Evolved",
+    "268910": "Cuphead + DLC The Delicious Last Course",
+    "284160": "BeamNG.drive",
+    "322330": "Don't Starve Together",
+    "371660": "Far Cry® Primal + Bypass",
+    "385730": "WWE 2K16",
+    "431960": "Wallpaper Engine",
+    "447040": "Watch Dogs 2",
+    "526870": "Satisfactory",
+    "546560": "Half-Life Alyx",
+    "690830": "Foundation",
+    "814380": "Sekiro™ Shadows Die Twice - GOTY Edition",
+    "824270": "Koovaks Aim Trainer",
+    "883710": "Resident Evil 2 Remake",
+    "962400": "Granny",
+    "1114070": "My Child Lebensborn",
+    "1144200": "Ready or Not",
+    "1211020": "Wobbly Life",
+    "1245620": "ELDEN RING",
+    "1357870": "Metel - Horror Escape",
+    "1426210": "It Takes Two",
+    "1442430": "Storage Hunter Simulator",
+    "1659420": "UNCHARTED™ Legacy of Thieves Collection",
+    "1812620": "DSX",
+    "1848450": "Nightmare of Decay",
+    "1888930": "The Last of Us™ Part I",
+    "1947500": "The Walking Dead Saints & Sinners - Chapter 2 Retribution",
+    "2012840": "Portal with RTX",
+    "2050650": "Resident Evil 4",
+    "2169200": "Sniper Elite Resistance",
+    "2233120": "A Quiet Place The Road Ahead",
+    "2358720": "Black Myth Wukong",
+    "2379780": "Balatro",
+    "2536530": "The Pony Factory",
+    "2634950": "Tokyo Extreme Racer",
+    "2651280": "Spider-Man 2",
+    "2835570": "Buckshot Roulette",
+    "2842040": "Star Wars Outlaws",
+    "3058630": "Assetto Corsa Evo",
+    "3292260": "Amenti",
+    "601050": "Attack on Titan 2 - A.O.T.2",
+    "1091500": "CyberPunk 2077",
+    "2934180": "Doraemon Dorayaki Shop Story",
+    "2909400": "Final Fantasy VII Rebirth",
+    "732690": "FIVE NIGHTS AT FREDDY'S HELP WANTED",
+    "4000": "Garry's Mod",
+    "1159690": "Voidtrain",
+    "3198320": "Willie's Nightfall",
+    "1086940": "Baldur's Gate 3",
+    "236430": "DarkSouls 2",
+    "413150": "Stardew Valley",
+    "1249970": "Test Drive Unlimited Solar Crown",
+    "1261040": "Streamer Life Sim",
+    "1771300": "KingdomCome Deliverance 2",
+    "2916430": "Fast Food Simulator",
+    "3244220": "A Game About Digging A Hole",
+    "3205080": "Bad Parenting 1 Mr.Red Face",
+    "1533390": "Gorilla Tag",
+    "2507610": "The Quintessential Quintuplets - Memories of a Quintessential Summer",
+    "3008670": "Poppy Playtime - Chapter 4",
+    "2890830": "Streamer Life Simulator 2",
+    "434840": "Little Nightmares",
+    "2527500": "Miside",
+    "860510": "Little Nightmares II",
+    "914620": "Mist Survival",
+    "322330": "Don't Starve Together",
+    "620": "Portal 2",
+    "2215430": "Ghost of Tsushima DIRECTOR'S CUT",
+    "3241660": "R.E.P.O",
+    "1903340": "Expedition 33",
+    "3240220": "Grand Theft Auto V Enhanced",
+    "2668510": "Red Dead Redemption",
+    "3590": "PVZ GOTY Edition",
+    "3164500": "Schedule 1",
+    "508440": "Totally Accurate Battle Simulator",
+    "1332720": "Thief Simulator 2",
+    "1290000": "PowerWash Simulator",
+    "611670": "The Elder Scrolls V Skyrim VR",
+    "1190970": "House Flipper 2",
+    "1817190": "Spider-Man Miles Morales",
+    "3017860": "DOOM The Dark Ages",
+    "379720": "DOOM",
+    "1817070": "Spider-Man Remastered",
+    "72850": "The Elder Scrolls V Skyrim",
+    "3159330": "Assassins Creed Shadows",
+    "2623190": "The Elder Scrolls v Oblivion Remastered",
+    "105600": "Terraria",
+    "3259470": "Papa's Pizzeria Deluxe",
+    "1366800": "Crosshair X",
+    "1284190": "The Planet Crafter",
+    "322170": "Geometry Dash",
+    "1030840": "Mafia Definitive Edition",
+    "50130": "Mafia II Classic",
+    "1364780": "Street Fighter™ 6",
+    "292030": "The Witcher 3 Wild Hunt",
+    "2627570": "Goofy Gorilla's",
+    "1455630": "The Game Of Life 2",
+    "967050": "Pacify",
+    "3527290": "Peak",
+    "201870": "Assassin's Creed Revelations",
+    "962130": "Grounded",
+    "33230": "Assassin's Creed II",
+    "286160": "TableTop Simulator",
+    "1682970": "Uncrashed FPV Drone sim",
+    "2272540": "FBC FireBreak",
+    "2622380": "EldenRing Nightreign",
+    "1222700": "A Way Out",
+    "242050": "Assassin's Creed IV Black Flag",
+    "3035570": "Assassin's Creed Mirage",
+    "289650": "Assassin's Creed Unity",
+    "3489700": "Stellar Blade",
+    "2406770": "BodyCam",
+    "368500": "Assassin's Creed Syndicate",
+    "1659040": "HITMAN World of Assassination",
+    "1435790": "Escape Simulator",
+    "812140": "Assassin's Creed Odyssey",
+    "251570": "7 Days to die",
+    "2208920": "Assassin's Creed Valhalla",
+    "550": "Left 4 Dead 2",
+    "1107320": "OutBrk",
+    "1593500": "God Of War",
+    "739630": "Phasmophobia",
+   "620980": "BeatSaber",
+   "1222700": "A Way Out",
+   "747660": "FNAF Security Breach",
+   "1030300": "Hollow Knight: Silksong",
+};
+
+const gameOrder = [
+  "14147",
+  "400",
+  "440",
+  "21100",
+  "55110",
+  "115320",
+  "203750",
+  "213330",
+  "222480",
+  "223850",
+  "227300",
+  "242550",
+  "244210",
+  "246620",
+  "268910",
+  "284160",
+  "322330",
+  "371660",
+  "385730",
+  "431960",
+  "447040",
+  "526870",
+  "546560",
+  "690830",
+  "814380",
+  "824270",
+  "883710",
+  "962400",
+  "1114070",
+  "1144200",
+  "1211020",
+  "1245620",
+  "1357870",
+  "1426210",
+  "1442430",
+  "1659420",
+  "1812620",
+  "1848450",
+  "1888930",
+  "1947500",
+  "2012840",
+  "2050650",
+  "2169200",
+  "2233120",
+  "2358720",
+  "2379780",
+  "2536530",
+  "2634950",
+  "2651280",
+  "2835570",
+  "2842040",
+  "3058630",
+  "3292260",
+  "601050",
+  "1091500",
+  "2934180",
+  "2909400",
+  "732690",
+  "4000",
+  "1159690",
+  "3198320",
+  "1086940",
+  "236430",
+  "413150",
+  "1249970",
+  "1261040",
+  "1771300",
+  "2916430",
+  "3244220",
+  "3205080",
+  "1533390",
+  "2507610",
+  "3008670",
+  "2890830",
+  "434840",
+  "2527500",
+  "860510",
+  "914620",
+  "322330",
+  "620",
+  "2215430",
+  "1903340",
+  "3240220",
+  "2668510",
+  "3590",
+  "3164500",
+  "508440",
+  "1332720",
+  "1290000",
+  "611670",
+  "1190970",
+  "1817190",
+  "3017860",
+  "379720",
+  "1817070",
+  "72850",
+  "3159330",
+  "2623190",
+  "105600",
+  "3259470",
+  "1366800",
+  "1284190",
+  "322170",
+  "1030840",
+  "50130",
+  "1364780",
+  "292030",
+  "2627570",
+  "1455630",
+  "967050",
+  "3527290",
+  "201870",
+  "962130",
+  "33230",
+  "286160",
+  "286160",
+  "1682970",
+  "2272540",
+  "2622380",
+  "1222700",
+  "242050",
+  "3035570",
+  "289650",
+  "3489700",
+  "2406770",
+  "368500",
+  "1659040",
+  "1426210",
+  "1435790",
+  "812140",
+  "251570",
+  "2208920",
+  "550",
+  "1107320",
+  "1593500",
+  "739630",
+  "620980",
+  "1222700",
+  "747660",
+  "1030300"
+];
+
+
+// When adding a new game
+function addGame(id, name) {
+  games[id] = name;
+  gameOrder.push(id);
+}
+    const gameList = document.getElementById("game-list");
+    const searchInput = document.getElementById("search");
+
+    function displayGames(filter = "") {
+        gameList.innerHTML = "";
+        for (const [id, name] of Object.entries(games)) {
+            if (name.toLowerCase().includes(filter.toLowerCase()) || id.includes(filter)) {
+                const li = document.createElement("li");
+                const button = document.createElement("button");
+                button.className = "game-button";
+                button.textContent = `${name} - ${id}`;
+                button.onclick = () => {
+                    navigator.clipboard.writeText(id);
+                    alert(`✅ App ID ${id} copied to clipboard!`);
+                };
+                li.appendChild(button);
+                gameList.appendChild(li);
             }
-        });
+        }
+    }
 
-        // Copy App ID functionality
-        const gameIds = document.querySelectorAll('.game-id');
-        gameIds.forEach(gameId => {
-            gameId.addEventListener('click', () => {
-                const appId = gameId.getAttribute('data-id');
-                navigator.clipboard.writeText(appId).then(() => {
-                    alert(`Copied App ID: ${appId}`);
-                });
-            });
-        });
-    </script>
+searchInput.addEventListener("input", (e) => {
+    renderSortedGames(e.target.value);
+});
+
+document.getElementById("sort-mode").addEventListener("change", () => {
+    renderSortedGames(searchInput.value);
+});
+
+const sortSelect = document.getElementById("sort-mode");
+renderSortedGames();
+searchInput.addEventListener("input", (e) => {
+    renderSortedGames(e.target.value);
+});
+
+document.getElementById("sort-mode").addEventListener("change", () => {
+    renderSortedGames(searchInput.value);
+});
+
+function sortGames(mode) {
+  let entries;
+
+  if (mode === "newest") {
+    entries = gameOrder
+      .slice()          // copy array so we don’t mutate original
+      .reverse()        // newest first
+      .map(id => [id, games[id]]);
+  } else if (mode === "oldest") {
+    entries = gameOrder.map(id => [id, games[id]]);
+  } else {
+    // For AZ and ZA, sort by name
+    entries = Object.entries(games);
+    if (mode === "az") {
+      entries.sort((a, b) => a[1].localeCompare(b[1]));
+    } else if (mode === "za") {
+      entries.sort((a, b) => b[1].localeCompare(a[1]));
+    }
+  }
+
+  return entries;
+}
+
+function renderSortedGames(filter = "") {
+    const mode = sortSelect.value;
+    const sorted = sortGames(mode);
+
+    gameList.innerHTML = "";
+    let count = 0;
+
+    for (const [id, name] of sorted) {
+        if (name.toLowerCase().includes(filter.toLowerCase()) || id.includes(filter)) {
+            const li = document.createElement("li");
+            const button = document.createElement("button");
+            button.className = "game-button";
+            button.textContent = `${name} - ${id}`;
+            button.onclick = () => {
+                navigator.clipboard.writeText(id);
+                alert(`✅ App ID ${id} copied to clipboard!`);
+            };
+            li.appendChild(button);
+            gameList.appendChild(li);
+            count++;
+        }
+    }
+
+    document.getElementById("result-count").innerText = `Showing ${count} game${count !== 1 ? "s" : ""}`;
+};
+function displayRecentlyAdded(games) {
+    const recentList = document.getElementById("recent-games");
+    const recentEntries = Object.entries(games).slice(-10).reverse(); // last 10 added
+
+    for (const [id, name] of recentEntries) {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>ID ${id}:</strong> ${name}`;
+        recentList.appendChild(li);
+    }
+}
+
+displayRecentlyAdded(games);
+
+// Animate toggle
+const toggleButton = document.getElementById("toggle-recent");
+const recentBox = document.getElementById("recently-added");
+
+let expanded = false;
+
+toggleButton.addEventListener("click", () => {
+    expanded = !expanded;
+    if (expanded) {
+        recentBox.style.maxHeight = "300px";
+        recentBox.style.paddingTop = "15px";
+        recentBox.style.paddingBottom = "15px";
+        toggleButton.innerText = "▼";
+    } else {
+        recentBox.style.maxHeight = "0";
+        recentBox.style.paddingTop = "0";
+        recentBox.style.paddingBottom = "0";
+        toggleButton.innerText = "▲";
+    }
+});
+    window.toggleFullscreen = function () {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    };
+});
+</script>
+</div>
 </body>
 </html>

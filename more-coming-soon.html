@@ -5,67 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>More Coming Soon - SteamyDumplingracy</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
         /* Body styles */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
             margin: 0;
             padding: 20px;
+            transition: all 0.3s ease;
         }
 
         /* Container styles */
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #2d2d2d;
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
 
-        /* Heading styles */
         h1 {
-            color: #bb86fc;
-            margin-bottom: 20px;
-            font-size: 2.5em;
+            color: #ff00ff;
+            font-size: 3em;
             text-transform: uppercase;
             letter-spacing: 2px;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #d400d4; }
+            to { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #d400d4; }
         }
 
         /* Button styles */
-        .btn {
+        .feature-button {
             display: inline-block;
-            padding: 15px 30px;
-            background-color: #6200ee;
+            padding: 12px;
+            background: #ff00ff;
             color: white;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
             transition: all 0.3s ease;
-            font-size: 1em;
-            margin: 10px;
-        }
-        .btn:hover {
-            background-color: #3700b3;
-            transform: scale(1.05);
+            box-shadow: 0 0 10px #ff00ff;
+            cursor: pointer;
+            width: 80%;
+            margin: 10px auto;
         }
 
-        /* Return button */
-        #return-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 15px 30px;
-            background-color: #6200ee;
+        .feature-button:hover {
+            background: #d400d4;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #ff00ff;
+        }
+
+        /* Button positions */
+        #home-button, #coming-soon-button, #fullscreen-btn {
+            padding: 12px 25px;
+            background-color: #ff00ff;
             color: white;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 30px;
+            font-size: 1.1em;
             transition: all 0.3s ease;
-            font-size: 1em;
+            box-shadow: 0 0 10px #ff00ff;
+            position: fixed;
+            z-index: 1000;
         }
-        #return-button:hover {
-            background-color: #3700b3;
+
+        #home-button {
+            top: 10px;
+            left: 10px;
+        }
+
+        #coming-soon-button {
+            top: 10px;
+            right: 10px;
+        }
+
+        #fullscreen-btn {
+            bottom: 10px;
+            left: 10px;
+        }
+
+        #home-button:hover, #coming-soon-button:hover, #fullscreen-btn:hover {
+            background-color: #d400d4;
             transform: scale(1.05);
         }
 
@@ -73,29 +103,47 @@
         ul {
             list-style-type: none;
             padding: 0;
+            text-align: left;
+            margin-top: 20px;
         }
+
         li {
-            margin: 10px 0;
-            font-size: 1.2em;
+            margin: 15px 0;
+            font-size: 1.5em;
         }
     </style>
 </head>
 <body>
-    <!-- Return button -->
-    <a id="return-button" href="index.html">Return to Homepage</a>
+    <!-- Navigation buttons -->
+    <a id="home-button" href="index.html">🏠 Home</a>
+    <a id="coming-soon-button" href="requests.html">💬 Request Features</a>
+    <a id="fullscreen-btn" href="#" onclick="toggleFullScreen()">⛶ Fullscreen</a>
 
     <div class="container">
         <h1>More Coming Soon</h1>
-        <p>Here’s a list of features we’ve completed:</p>
+        <p>Here's a list of features we're working on and updates to expect:</p>
         <ul>
-            <li>🎨 Better website design</li>
+            <li>🎨 Better website design (finished!!)</li>
             <li>📥 A full page for downloading manifests (done)</li>
             <li>🎮 A game list with copy-pasting for easy manifest downloads (done)</li>
-            <li>✨ And more exciting updates!</li>
+            <li>✨ More exciting features coming soon!</li>
         </ul>
 
         <!-- Request Features button -->
-        <a href="requests.html" class="btn">Request Features</a>
+        <a href="requests.html" class="feature-button">Request Features</a>
     </div>
+
+    <script>
+        // Fullscreen toggle function
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
 </body>
 </html>

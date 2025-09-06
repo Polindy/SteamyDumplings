@@ -5,59 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Features - SteamyDumplingracy</title>
     <style>
-        /* Body styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            animation: fadeIn 1s ease-in-out;
             margin: 0;
-            padding: 20px;
+            transition: all 0.3s ease;
         }
-
-        /* Container styles */
+        
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #2d2d2d;
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        /* Heading styles */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h1 {
-            color: #bb86fc;
-            margin-bottom: 20px;
-            font-size: 2.5em;
+            color: #ff00ff;
+            font-size: 3em;
             text-transform: uppercase;
             letter-spacing: 2px;
+            animation: glow 1.5s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #d400d4; }
+            to { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #d400d4; }
         }
 
         /* Input and button styles */
         #feature-input {
-            width: 100%;
+            width: 80%;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 25px;
-            border: 1px solid #bb86fc;
+            border: 1px solid #ff00ff;
             background-color: #2d2d2d;
             color: #ffffff;
-            font-size: 1em;
+            font-size: 1.1em;
             outline: none;
+            transition: 0.3s;
         }
-        #submit-request {
-            padding: 15px 30px;
-            background-color: #6200ee;
+        #feature-input:focus {
+            border-color: #d400d4;
+            box-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Button styles (same as in the games list page) */
+        .feature-button {
+            display: inline-block;
+            padding: 12px;
+            background: #ff00ff;
             color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
             transition: all 0.3s ease;
+            box-shadow: 0 0 10px #ff00ff;
+            cursor: pointer;
+            width: 80%;
+            margin: 10px auto;
         }
-        #submit-request:hover {
-            background-color: #3700b3;
+
+        .feature-button:hover {
+            background: #d400d4;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #ff00ff;
+        }
+
+        /* Button positions */
+        #home-button, #coming-soon-button, #fullscreen-btn {
+            padding: 12px 25px;
+            background-color: #ff00ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px #ff00ff;
+            position: fixed;
+            z-index: 1000;
+        }
+
+        #home-button {
+            top: 10px;
+            left: 10px;
+        }
+
+        #coming-soon-button {
+            top: 10px;
+            right: 10px;
+        }
+
+        #fullscreen-btn {
+            bottom: 10px;
+            left: 10px;
+        }
+
+        #home-button:hover, #coming-soon-button:hover, #fullscreen-btn:hover {
+            background-color: #d400d4;
             transform: scale(1.05);
         }
 
@@ -65,25 +126,31 @@
         #requested-features {
             margin-top: 30px;
             text-align: left;
+            display: none; /* Initially hide the requested features */
         }
         #requested-features ul {
             list-style-type: none;
             padding: 0;
         }
         #requested-features li {
-            padding: 10px;
-            border-bottom: 1px solid #444;
+            background-color: #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
         }
-        #requested-features li:last-child {
-            border-bottom: none;
+        #requested-features li:hover {
+            background-color: #444;
+            transform: translateY(-5px);
         }
 
         /* Delete button styles */
         .delete-btn {
-            background: red;
+            background: #f44336;
             color: white;
             border: none;
             padding: 5px 10px;
@@ -92,45 +159,23 @@
             transition: 0.3s;
         }
         .delete-btn:hover {
-            background: darkred;
+            background: #d32f2f;
         }
 
-        /* Info message */
-        .info-message {
-            color: #bb86fc;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-
-        /* Return button */
-        #return-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 15px 30px;
-            background-color: #6200ee;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-size: 1em;
-        }
-        #return-button:hover {
-            background-color: #3700b3;
-            transform: scale(1.05);
-        }
     </style>
 </head>
 <body>
 
-    <!-- Return button -->
-    <a id="return-button" href="more-coming-soon.html">Return to Coming Soon</a>
+    <!-- Navigation buttons -->
+    <a id="home-button" href="index.html">🏠 Home</a>
+    <a id="coming-soon-button" href="more-coming-soon.html">⬇️ Coming Soon</a>
+    <a id="fullscreen-btn" href="#" onclick="toggleFullScreen()">⛶ Fullscreen</a>
 
     <div class="container">
         <h1>Request Features</h1>
         <p>Have an idea for a new feature? Let us know!</p>
         <input type="text" id="feature-input" placeholder="Enter your feature request...">
-        <button id="submit-request">Submit Request</button>
+        <button class="feature-button" id="submit-request">Submit Request</button>
         <p class="info-message">Requests are auto-deleted after 1 week.</p>
 
         <!-- Requested features list -->
@@ -140,82 +185,123 @@
         </div>
     </div>
 
-    <!-- Firebase SDK - Corrected Version -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
     <script>
-        // 🔥 Firebase Config (Make sure this is correct!)
-        const firebaseConfig = {
-            apiKey: "AIzaSyAlaCGseWSNF41sKqdS3_PqXABgpsKVVso",
-            authDomain: "feature-requests-bf962.firebaseapp.com",
-            projectId: "feature-requests-bf962",
-            storageBucket: "feature-requests-bf962.appspot.com", // FIXED
-            messagingSenderId: "823579759336",
-            appId: "1:823579759336:web:e2faf82c62751a906def5d"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        document.addEventListener("DOMContentLoaded", () => {
-            console.log("✅ Firebase Loaded and Page Ready!");
-
-            const submitButton = document.getElementById("submit-request");
-            const featureInput = document.getElementById("feature-input");
-            const featureList = document.getElementById("feature-list");
-
-            if (!submitButton || !featureInput || !featureList) {
-                console.error("❌ Missing elements.");
-                return;
+    // Fullscreen toggle function
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
             }
+        }
+    }
 
-            // 📝 Submit New Feature Request
-            submitButton.addEventListener("click", () => {
-                const feature = featureInput.value.trim();
-                if (feature) {
-                    db.collection("requests").add({
-                        text: feature,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => {
-                        console.log("✅ Feature added to Firebase!");
-                        featureInput.value = "";
-                    }).catch(error => {
-                        console.error("❌ Error adding request:", error);
-                    });
-                } else {
-                    alert("⚠️ Please enter a feature request.");
-                }
-            });
+    // 🔒 Check if username exists in localStorage
+    let currentUser = localStorage.getItem("username");
 
-            // 👀 Real-Time Updates: Load & Display Requests
-            db.collection("requests").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-                featureList.innerHTML = "";
-                snapshot.forEach(doc => {
-                    const request = doc.data();
-                    const li = document.createElement("li");
-                    li.textContent = request.text;
+    if (!currentUser) {
+        let username = prompt("Enter your name (you won’t be able to change it later):");
+        
+        if (!username) {
+            alert("⚠️ You must enter a name!");
+            location.reload();
+        } else {
+            let confirmUsername = confirm(`Are you sure? You won't be able to change it later!`);
+            if (confirmUsername) {
+                localStorage.setItem("username", username);
+                currentUser = username;
+            } else {
+                location.reload();
+            }
+        }
+    }
 
-                    // 🗑️ Add a Delete Button
-                    const deleteButton = document.createElement("button");
-                    deleteButton.textContent = "❌";
-                    deleteButton.className = "delete-btn";
-                    deleteButton.onclick = () => deleteRequest(doc.id);
+    console.log("✅ Logged in as:", currentUser);
 
-                    li.appendChild(deleteButton);
-                    featureList.appendChild(li);
+    // Firebase Config
+    const firebaseConfig = {
+        apiKey: "AIzaSyAlaCGseWSNF41sKqdS3_PqXABgpsKVVso",
+        authDomain: "feature-requests-bf962.firebaseapp.com",
+        projectId: "feature-requests-bf962",
+        storageBucket: "feature-requests-bf962.appspot.com",
+        messagingSenderId: "823579759336",
+        appId: "1:823579759336:web:e2faf82c62751a906def5d"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("✅ Firebase Loaded and Page Ready!");
+
+        const submitButton = document.getElementById("submit-request");
+        const featureInput = document.getElementById("feature-input");
+        const featureList = document.getElementById("feature-list");
+        const requestedFeaturesSection = document.getElementById("requested-features");
+
+        // 📝 Submit New Feature Request
+        submitButton.addEventListener("click", () => {
+            const feature = featureInput.value.trim();
+            if (feature) {
+                db.collection("requests").add({
+                    text: feature,
+                    username: currentUser, // Use saved username
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    console.log("✅ Feature added!");
+                    featureInput.value = "";
+                }).catch(error => {
+                    console.error("❌ Error adding request:", error);
                 });
-            });
-
-            // 🗑️ Function to Delete a Request
-            function deleteRequest(id) {
-                db.collection("requests").doc(id).delete()
-                    .then(() => console.log("🗑️ Deleted request:", id))
-                    .catch(error => console.error("❌ Error deleting request:", error));
+            } else {
+                alert("⚠️ Please enter a feature request.");
             }
         });
-    </script>
 
+        // Firebase real-time update listener
+        db.collection("requests").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+            // Show the requested features once the user has claimed a name
+            requestedFeaturesSection.style.display = 'block';
+
+            featureList.innerHTML = "";
+            snapshot.forEach(doc => {
+                const request = doc.data();
+                const li = document.createElement("li");
+                li.textContent = `${request.text} - Posted by ${request.username}`;
+
+                // Check if the current user matches the request creator or is "PookieGPT"
+                if (currentUser === request.username || currentUser === "PookieGPT") {
+                    // Create the delete button if the user can delete the request
+                    const deleteBtn = document.createElement("button");
+                    deleteBtn.textContent = "❌ Delete";
+                    deleteBtn.classList.add("delete-btn");
+
+                    // Delete functionality
+                    deleteBtn.addEventListener("click", () => {
+                        db.collection("requests").doc(doc.id).delete()
+                            .then(() => {
+                                console.log("✅ Request deleted!");
+                                // Remove the request from the UI immediately
+                                li.remove();  // This removes the request from the list immediately
+                            })
+                            .catch(error => {
+                                console.error("❌ Error deleting request:", error);
+                            });
+                    });
+
+                    li.appendChild(deleteBtn);
+                }
+
+                featureList.appendChild(li);
+            });
+        });
+    });
+</script>
 </body>
 </html>

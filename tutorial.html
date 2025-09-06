@@ -3,78 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorial</title>
+    <title>Tutorial - Steamy Dumplingracy</title>
     <style>
-        /* Body styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            text-align: center;
             padding: 20px;
-            opacity: 0; /* Start invisible */
-            animation: fadeIn 0.5s ease forwards; /* Fade-in animation */
+            animation: fadeIn 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
-
-        /* Fade-in animation */
+        
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            animation: slideUp 1s ease-in-out;
+        }
+        
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Fade-out animation */
-        body.fade-out {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        /* Heading styles */
         h1 {
-            color: #bb86fc;
+            color: #ff00ff;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow 1.5s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #d400d4; }
+            to { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #d400d4; }
         }
 
-        /* Paragraph styles */
-        p {
-            line-height: 1.6;
-        }
-
-        /* Ordered list styles */
-        ol {
-            line-height: 1.6;
-        }
-
-        /* Link styles */
-        a {
-            color: #bb86fc;
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff00ff;
+            color: white;
             text-decoration: none;
+            border-radius: 20px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 8px #ff00ff;
+            cursor: pointer;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .btn:hover {
+            background: #d400d4;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #ff00ff;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Tutorial</h1>
-    <p>Here’s how to use the RAR file from the GoFile link with the full package:</p>
-    <ol>
-        <li>Download the RAR file from the <a href="https://gofile.io/d/scWmXA" target="_blank">GoFile link</a>.</li>
-        <li>Extract the contents of the RAR file using a tool like <a href="https://www.win-rar.com/" target="_blank">WinRAR</a> or <a href="https://www.7-zip.org/" target="_blank">7-Zip</a>.</li>
-        <li>Follow the instructions included in the extracted files to set up your environment.</li>
-        <li>Enjoy using your Steamy package! 🎉</li>
-    </ol>
-    <p><a href="https://polindy.github.io/SteamyDumplings/">← Go back to the homepage</a></p>
+    <div class="container">
+        <h1>How to Use Steamy Dumplingracy</h1>
+        <p>Follow these simple steps to get started!</p>
 
-    <script>
-        // Add fade-out animation when clicking links
-        document.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (link.href && !link.href.includes('#')) {
-                    e.preventDefault(); // Prevent the default link behavior
-                    document.body.classList.add('fade-out'); // Start fade-out animation
+        <h2>🚀 Step 1: Download Steamtools</h2>
+        <p>Go to the <a href="steamtools.html" class="btn">SteamTools page </a>  and choose which version you want then download steamtools and run the exe to install it.</p>
+        
+        <h2> Step 2:📜 Browse Games</h2>
+        <p>Go to the <a href="games.html" class="btn">Games List</a> and find a game you like.</p>
+        
+        <h2>📋 Step 2: Copy the Game ID</h2>
+        <p>Click on a game to copy its App ID automatically.</p>
+        
+        <h2>⬇️ Step 3: Download Your Game</h2>
+        <p>Go to the <a href="download.html" class="btn">Download Page</a>, paste the App ID, and generate your download link!</p>
+        
+        <div class="nav">
+            <a href="index.html" class="btn">🏠 Home</a>
+            <a href="games.html" class="btn">🎮 Games</a>
+            <a href="download.html" class="btn">⬇️ Download</a>
+        </div>
+  </div>
 
-                    // Navigate to the new page after the fade-out completes
-                    setTimeout(() => {
-                       
+  <!-- SteamTools button -->
+  <div style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+    <a href="steamtools.html" class="btn">🛠️ SteamTools</a>
+  </div>
+</body>
+</html>
